@@ -1,0 +1,90 @@
+html, body {
+    background-color: #70CF51;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow:hidden;
+    margin:0px; padding:0px;
+    /* background-image: url('../images/bg.png'); */
+    background-color: black;
+    background-size: cover;
+}
+
+body * {
+    position: absolute;
+    display: block;
+    margin:0px; padding:0px;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+}
+@-webkit-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+ }
+ 
+ @keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+ }
+
+ .fadeOut {
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+ }
+
+dead {
+	width:50px; min-height:50px;
+    background-image: url('../images/dead.png');
+    -webkit-animation-duration: 10s;animation-duration: 10s;
+    -webkit-animation-fill-mode: both;animation-fill-mode: both;
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+}
+
+water {
+	width:672px; min-height:342px;
+	background-image: url('../images/water.png');
+}
+
+top {
+	width:672px; min-height:57px;
+	background-image: url('../images/top.png');
+}
+
+car {
+	width:58px; min-height:50px;
+	background-image: url('../images/car.png');
+}
+
+Road_1 {
+	width:672px; min-height:57px;
+	background-image: url('../images/road_1.png');
+}
+
+path {
+	width:672px; min-height:57px;
+	background-image: url('../images/Path.png');
+}
+
+frog {
+	width:34px; min-height:46px;
+	background-image: url('../images/frog.png');
+}
+
+tree {
+	width:277px; min-height:54px;
+	background-image: url('../images/tree.png');
+}
+
+bird {
+    width:67px; height:110px;
+    background-image: url('../images/bird.png');
+}
+
+gun {
+    width:54px; height:44px;
+    background-image: url('../images/gun.png');
+}
+
+bullet {
+    width:22px; height:22px;
+    background-image: url('../images/bullet.png');
+}
