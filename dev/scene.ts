@@ -7,9 +7,11 @@ class Scene {
         this.game = g;
     }
 
+    //Resets the scene
     public resetScreen():void{
         document.body.innerHTML = "";
     }
+
 
     public switchScreen(scene:string):void{
         this.game.switchScreen(scene)
@@ -19,6 +21,7 @@ class Scene {
 
     }
 
+    //adds a html element to the scene
     protected addElement(tag:string, x:number, y:number):HTMLElement{
         let element = document.createElement(tag);
         document.body.appendChild(element);

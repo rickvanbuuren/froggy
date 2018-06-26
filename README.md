@@ -120,11 +120,11 @@ kunnen veranderen, maak je zogeheten getters en setters aan. Voor methods gebrui
 
 Properties
 
-![ParentClass](./docs/img/encapsulation_properties.PNG)
+![ParentClass](./docs/images/properties.PNG)
 
 Methods
 
-![ChildClass](./docs/img/encapsulation_methods.PNG)
+![ChildClass](./docs/images/methodes.PNG)
 
 
 **Composition:**
