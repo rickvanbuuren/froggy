@@ -1,4 +1,4 @@
-/// <reference path="chicken.ts" />
+/// <reference path="game.ts" />
 
 class Water extends StaticGameObject {
     
@@ -7,8 +7,8 @@ class Water extends StaticGameObject {
         this._div = document.createElement("water");
         document.body.appendChild(this._div);
          
-        this.width = w;//672 
-        this.height = h;//342
+        this.width = w; 
+        this.height = h;
         this.x = x;
         this.y = y;
 

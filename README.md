@@ -160,14 +160,14 @@ voorbeeld:
 **Voorbeeld in eigen code**
 
 
-Hier gebruik ik het specifiek zodat ik de functie changeGameScene van de Game kan gebruiken binnen de Scene classes
+Hier gebruik ik het specifiek zodat ik de functie switchscreen van de Game kan gebruiken binnen de Scene classes.
 
 ![Compo](./docs/images/composition.PNG)
 
 **Inheritence:**
 
-Inheritence gebruik ik zodat ik geen dubbele code hoef te schrijven. Ik maak een class waar de basis methods en properties in zitten. Als ik dan 
-een nieuwe class ga aanmaken kan ik deze alles van de eerste class laten overerven.
+Ik gebruik inheritence zodat ik geen code opnieuw hoef te schrijven. Ik maak een class waar de basis methods en properties in zitten. Ik kan deze class
+dan gebruiken om op andere classes toe te passen. 
 
 voorbeeld:
 
@@ -205,12 +205,12 @@ voorbeeld:
 
 **Voorbeeld in eigen code:** 
 
-De GameObject Class wordt door heel veel andere classes overgeërfd. In de GameObject wordt de positie van de html element veranderd en is er een methode waarmee
-een element bewogen kan worden.
-![ParentClass](./docs/img/parentClass.PNG)
 
-De Player class maakt bijvoorbeeld gebruik van de Gameobject
-![ChildClass](./docs/img/childClass.PNG)
+De Class Car wordt door twee objecten gebruikt. In de Car class wordt er een update en x y width en height meegeven.    
+![ParentClass](./docs/img/ParentClass.PNG)
+
+De snelheid en het uiterlijk van de auto wordt hier veranderd.
+![ChildClass](./docs/img/ChildClass.PNG)
 
 
 #### **Klassendiagram**
