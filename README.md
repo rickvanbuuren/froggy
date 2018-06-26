@@ -65,7 +65,7 @@ van andere delen van je code. Een class heeft zijn eigen logica, soms aangevuld 
 
 **Een voorbeeld van een class in mijn game:**
 
-![Class](./docs/img/classdiagram.PNG)
+![Class](./docs/images/classdiagram.PNG)
 
 **Encapsulation:**
 Encapsulation gebruik ik om mijn classes te beschermen en alles alleen beschikbaar te hebben in de juiste class.
