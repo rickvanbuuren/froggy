@@ -1,4 +1,4 @@
-/// <reference path="chicken.ts" />
+/// <reference path="game.ts" />
 
 class Frog {
     
@@ -7,76 +7,64 @@ class Frog {
     public y:number;
     private width:number;
     private height:number;
-    private speed:number;
-
-    // private chickes:Array<Chicken>;
+    private xspeed:number;
+    private yspeed:number;
+    private _lifes:number;
 
     public get div(): HTMLElement {
 		return this._div;
+    }
+    
+    public get lives(): number {
+		return this._lifes;
 	}
 
     constructor(x:number, y:number) {
         this._div = document.createElement("frog");
         document.body.appendChild(this._div);
-        
-        // this.speed = Math.random() * 4 + 1;
+
+        this._lifes = 3;
         this.width = 34;
         this.height = 46;
         this.x = x;
         this.y = y;
+        this.xspeed = 30;
+        this.yspeed = 57
 
         this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(270deg)" 
-        // this._div.style.transform = "rotate(270deg)";
-
-        // this.move(event);
-
-        // this.chickes = new Array<Chicken>();
-
-        // dit vlot heeft kippen nodig
-        // ...
-
-        // for(let i = 0; i < Math.floor(Math.random() * 4 + 1); i ++){
-        //     this.chickes.push(new Chicken(this.x + (100 * i) + 10 , this.y - (this.y) - 86, this))
-        // }
-
-        // this._div.addEventListener('keydown', ()=> move(e))
 
         document.body.addEventListener('keydown', ()=> this.move(event:KeyboardEvent))
-
     }
 
     private move(e:KeyboardEvent):void {
         var code = e.keyCode ? e.keyCode : e.which;
             if (code === 38) { //up key
-                // this.y = Math.max(, this.x-57)
-                this.y -= 57
+                this.y -= this.yspeed;
                 this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(270deg)"
             } else if (code === 40) { //down key
-                this.y += 57
+                console.log(this.y)
+                if(this.y > 733){
+                    this.y += 0;
+                }else{
+                    this.y += this.yspeed;
+                }
                 this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(90deg)"
             } else if(code === 37){  //left key
-                this.x = Math.max(100, this.x-10);
+                this.x = Math.max(109, this.x-this.xspeed);
                 this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(180deg)"
             } else if(code === 39){  //right key
-                this.x = this.x = Math.min(735, this.x+30);
+                this.x = Math.min(735, this.x+this.xspeed);
                 this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(0deg)"
             }
     }
 
     public getRectangle() {
-        return this._div.getBoundingClientRect()
+        return this._div.getBoundingClientRect();
     }
 
     public setBegin(){
-        this.x = 400
-        this.y = 790
+        this.x = 400;
+        this.y = 790;
         this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(270deg)"
     }
-    
-    // public move():void {
-    //     this.x += this.speed;
-    //     if(this.x > window.innerWidth) this.x = -450;
-    //     this._div.style.transform = "translate("+this.x+"px, "+this.y+"px)";
-    // }
-
 }

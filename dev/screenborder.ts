@@ -1,6 +1,6 @@
-/// <reference path="game.ts" />
+/// <reference path="chicken.ts" />
 
-class Dead {
+class ScreenBorder {
     
     private _div: HTMLElement;
     private x:number;
@@ -13,15 +13,16 @@ class Dead {
 	}
 
     constructor(x:number, y:number) {
-        this._div = document.createElement("dead");
+        this._div = document.createElement("screenborder");
         document.body.appendChild(this._div);
          
-        this.width = 50;
-        this.height = 50;
+        // this.speed = Math.random() * 4 + 1;
+        this.width = 672;
+        this.height = 57;
         this.x = x;
         this.y = y;
 
-        this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) "
+        this._div.style.transform = "translate("+this.x+"px, "+this.y+"px)" 
     }
 
 }

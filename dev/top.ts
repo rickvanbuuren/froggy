@@ -1,29 +1,18 @@
 /// <reference path="chicken.ts" />
 
-class Top {
+class Top extends StaticGameObject{
     
-    private _div: HTMLElement;
-    private x:number;
-    public y:number;
-    private width:number;
-    private height:number;
-
-    public get div(): HTMLElement {
-		return this._div;
-	}
-
-    constructor(x:number, y:number) {
+    constructor(x:number, y:number, w:number, h:number) {
+        super(x,y,w,h)
         this._div = document.createElement("top");
         document.body.appendChild(this._div);
          
-        // this.speed = Math.random() * 4 + 1;
-        this.width = 672;
-        this.height = 57;
+        this.width = w;
+        this.height = h;
         this.x = x;
         this.y = y;
 
         this._div.style.transform = "translate("+this.x+"px, "+this.y+"px)" 
-
     }
 
 }
