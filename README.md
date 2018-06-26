@@ -7,7 +7,7 @@ op de boomstammen moeten springen.
 
 
 **Op het moment is het spel alleen speelbaar op Google Chrome.**
-**Demo op:** [Sketch Runner](https://rickvanbuuren.github.io/froggy/)
+**Demo op:** [Froggy](https://rickvanbuuren.github.io/docs/)
 
 #### Checklist
 - [x] De code van het individuele project staat op GitHub.
