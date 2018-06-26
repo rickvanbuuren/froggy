@@ -7,7 +7,7 @@ op de boomstammen moeten springen.
 
 
 **Op het moment is het spel alleen speelbaar op Google Chrome.**
-**Demo op:** [Sketch Runner](https://adriaangiel.github.io/sketch_runner/)
+**Demo op:** [Sketch Runner](https://rickvanbuuren.github.io/froggy/)
 
 #### Checklist
 - [x] De code van het individuele project staat op GitHub.
@@ -65,7 +65,7 @@ van andere delen van je code. Een class heeft zijn eigen logica, soms aangevuld 
 
 **Een voorbeeld van een class in mijn game:**
 
-![Class](../docs/images/classdiagram.PNG)
+![Class](./docs/images/class.PNG)
 
 **Encapsulation:**
 Encapsulation gebruik ik om mijn classes te beschermen en alles alleen beschikbaar te hebben in de juiste class.
@@ -162,7 +162,7 @@ voorbeeld:
 
 Hier gebruik ik het specifiek zodat ik de functie changeGameScene van de Game kan gebruiken binnen de Scene classes
 
-![Compo](./docs/img/composition.PNG)
+![Compo](./docs/images/composition.PNG)
 
 **Inheritence:**
 
@@ -214,7 +214,7 @@ De Player class maakt bijvoorbeeld gebruik van de Gameobject
 
 
 #### **Klassendiagram**
-![Klassendiagram](./docs/img/klassdiagram-game.jpg)
+![Klassendiagram](./docs/img/classdiagram.PNG)
 
 
 #### Peer review
