@@ -219,4 +219,4 @@ De snelheid en het uiterlijk van de auto wordt hier veranderd.
 
 #### Peer review
 Link naar peer review:
-[Dion Pisas](https://github.com/AdriaanGiel/sketch_runner/blob/master/Peer_Review_Dion_Pisas.md)
+[Adriaan Giel](https://github.com/rickvanbuuren/froggy/blob/master/Peer_Review_Adriaan_Giel.md)
