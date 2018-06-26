@@ -207,14 +207,14 @@ voorbeeld:
 
 
 De Class Car wordt door twee objecten gebruikt. In de Car class wordt er een update en x y width en height meegeven.    
-![ParentClass](./docs/img/ParentClass.PNG)
+![ParentClass](./docs/images/ParentClass.PNG)
 
 De snelheid en het uiterlijk van de auto wordt hier veranderd.
-![ChildClass](./docs/img/ChildClass.PNG)
+![ChildClass](./docs/images/ChildClass.PNG)
 
 
 #### **Klassendiagram**
-![Klassendiagram](./docs/img/classdiagram.PNG)
+![Klassendiagram](./docs/images/classdiagram.PNG)
 
 
 #### Peer review
