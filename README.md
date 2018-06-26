@@ -1,99 +1,246 @@
-# Een kip op een vlot
+## **Froggy**
 
-![Chickens](docs/images/fireatwill.png?raw=true "Fire at will")
+Mijn spel voor programmeren 4: Het is een simpele versie van de game Frogger. In dit spel 
+is het de bedoeling dat je de overkant van de weg en het water bereikt. Er rijden auto's 
+over de weg die je zult moeten ontwijken. Om aan de overkant van het water te komen zul je 
+op de boomstammen moeten springen.
 
-## Opdracht 1
 
-- Maak meerdere vlotten aan in game.ts
-- Plaats op elk vlot een random aantal kippen
-- Het HTML element van de kip append je aan het HTML element van het vlot
-- De kippen komen op de x as netjes naast elkaar te staan
-- Game roept de update functie van de vlotten aan. 
-- Een vlot roept de update functie van zijn kippen aan.
+**Op het moment is het spel alleen speelbaar op Google Chrome.**
+**Demo op:** [Sketch Runner](https://adriaangiel.github.io/sketch_runner/)
 
-## Opdracht 2
+#### Checklist
+- [x] De code van het individuele project staat op GitHub.
+- [x] De game is online speelbaar.
+- [x] De game bevat minimaal één van de onderstaande extra uitdagingen.
+- [x] De game heeft een startscherm en een eindscherm.
+- [x] Er zijn geen bugs.
+- [x] Het project maakt gebruik van deze OOP principes.
+    - [x] Classes
+    - [x] Encapsulation
+    - [x] Composition
+    - [x] Inheritance
+- [x] De GitHub pagina bevat een ReadMe bestand. Dit bestand bevat:
+- [x] Per bovengenoemd OOP principe een uitleg: waar is het toegepast, en waarom is het op die plek toegepast. De uitleg is inclusief code voorbeelden.
+- [x] Een klassendiagram van de game.
+- [x] Een link naar de peer review die in week 6 is gedaan
 
-- We gaan de kip bewapenen. Geef de kip een `click` event listener.
-- Bij een muisklik krijgt de kip een gun: `this.gun = new Gun();`
-- De gun heeft een `public fire(){}` functie.
-- Als je op de kip klikt terwijl hij al een gun heeft, dan roep je de `fire()` functie van de gun aan. Gebruik console.log om te zien of alles werkt.
+#### Extra opdrachten
+- [x] De game ziet er zeer verzorgd uit dankzij goed uitgewerkt UI design en artwork.
+- [ ] De game bevat een hiscore lijst. Scores worden bewaard nadat de game is afgesloten.
+- [ ] De game werkt met Canvas in plaats van DOM elementen
+- [ ] De game bevat local of online multiplayer.
+- [ ] De game werkt op mobiele schermen en ondersteunt touchscreen controls.
+- [ ] De game maakt gebruik van device api's zoals de camera, microfoon, gyroscoop of GPS.
+- [x] De game gebruikt een externe library uit de lijst in deze modulewijzer.
 
-## Opdracht 3
+De UI in deze game is precies zoals het in de orginale frogger eruit zag. 
+Ik maak gebruik van geluid door middel van de library howler.js. 
 
-De gun vuurt kogels af. Deze kogels moeten in beeld blijven als de kip en de gun weg zijn. Daarom voegen we de bullets toe aan de main game, en niet aan de gun. De bullets staan op hetzelfde niveau als de rafts. 
 
-**game.ts**
+Ik gebruik in dit spel alle technieken die we in de les hebben behandeld.
+**Classes** 
+In OOP programmeren wordt voor alles classes gebruikt. Met classes kan je variables(properties) en functies(methods) afschermen 
+van andere delen van je code. Een class heeft zijn eigen logica, soms aangevuld door een parent class of interface. 
 
-- Game.ts krijgt een array voor de bullets.
-- Game.ts roept de `move` functie van de bullets aan.
-- Game.ts heeft een `public addBullet()` functie waarmee je kogels aan de array kan toevoegen. 
+**Classes in mijn game:**
+* Game
+* Scene
+* StartScreen
+* GameScreen
+* EndScreen
+* WonScreen
+* SaticGameObject
+* Top
+* Water
+* Road
+* Car
+* PinkCar
+* WhiteCar
+* Tree
+* Frog
+* Dead
+* UiElement
+* Life
 
-**gun.ts**
+**Een voorbeeld van een class in mijn game:**
 
-- De `fire()` functie in Gun.ts maakt een nieuwe bullet aan: `let b:Bullet = new Bullet(x,y);`
-- In gun.ts moet een verwijzing bestaan naar de main game zijn. De bullet geef je vervolgens door met `this.game.addBullet(b);`
-- De bullet moet de x en y positie van de kip op het vlot weten, om op de goede plek gezet te worden. Zie voorbeeldcode!
+![Class](./docs/img/classdiagram.PNG)
 
-## UML
+**Encapsulation:**
+Encapsulation gebruik ik om mijn classes te beschermen en alles alleen beschikbaar te hebben in de juiste class.
+Voor encapsulation kan je verschillende modifiers gebruiken om de juiste doel te bereiken. 
 
-![UML](docs/images/uml.png?raw=true "UML")
+* **Private** gebruik je als je wilt dat de properties en/of method alleen beschikbaar zijn binnen de functie.
 
-### Voorbeeldcode
+        class object{
+            // properties en methods hebben allemaal de private modifier ervoor staan
+            private prop1:string;
+            private prop2:string;
+            
+            private function1()
+            {
+            
+            }
+        }
 
-#### Verwijzingen doorgeven
+* **Protected** gebruikt je bij inheritence. Hiermee maak je de properties en/of method van een parent class beschikbaar voor de class
+die overerft van de parent. 
 
-Via de constructor kan je een verwijzing naar de game doorgeven aan zijn children. Dit is handig als een child een functie van de game moet kunnen aanroepen. In dit voorbeeld zie je hoe de Chicken de gameOver functie van Game kan aanroepen:
-```
-class Game {
-    constructor(){
-        let raft = new Raft(this);
+        class Object{
+            // properties en methods hebben allemaal de protected modifier ervoor staan
+            protected prop1:string;
+            protected prop2:string;
+            
+            protected function1()
+            {
+            
+            }
+        }
+
+* **Public** gebruik je als je wilt dat de properties en/of method beschikbaar is voor iedereen die een class heeft geïnstantieerd.
+        
+        class Object{
+            // properties en methods hebben allemaal de public modifier ervoor staan
+            public prop1:string;
+            public prop2:string;
+            
+            public function1()
+            {
+            
+            }
+        }
+
+
+* **Static** gebruik je als je een propertie en/of method beschikbaar wilt maken voor de hele applicatie zonder dat een class is geïnstantieerd
+
+        class Object{
+            // properties en methods hebben de static modifier ervoor staan
+            static prop1:string;
+            
+            static function1()
+            {
+            
+            }
+        }
+        
+        class Object2{
+            
+            private doSomething()
+            {
+               // Kan worden gelezen zonder eerst een nieuwe object aan te maken. 
+               console.log(Object.prop1)
+            
+               // Kan aangeroepen worden zonder eerst een nieuwe Object aan te maken. 
+               Object.function1(); 
+            }
+            
+        }
+
+Om je applicatie zo veilig mogelijk te schrijven is de standaard eigenlijk dat alles private is. Als je een propertie wilt kunnen ophalen of 
+kunnen veranderen, maak je getters en setters. Voor functies gebruik je public alleen als de functie buiten de class moet kunnen worden aangeroepen.
+ 
+**Voorbeeld in eigen code:** 
+
+Properties
+
+![ParentClass](./docs/img/encapsulation_properties.PNG)
+
+Methods
+
+![ChildClass](./docs/img/encapsulation_methods.PNG)
+
+
+**Composition:**
+Composition gebruik je als je bepaalde classes aan elkaar wilt koppelen. Zo is er in mijn game een Game class die meerdere Scene classes heeft. Elke Scene class heeft weer de Game
+nodig. De Game class wordt dan opgeslagen in een propertie van de Scene class.
+ 
+voorbeeld:
+    
+    class Water{
+        // propertie wordt voorbereid om een Fish object te krijgen
+        private fish:Fish;
+    
+        // In de constructor word een Fish object meegegeven
+        constructor(fish:Fish)
+        {
+            // propertie wordt gevult met de Fish object
+            this.fish = fish;
+        }
     }
-    public gameOver(){
-        console.log("game over man!");
+    
+    // Fish object
+    class Fish{
+        private x:number;
+        private y:number;
+        
+        constructor(x:number,y:number)
+        {
+            this.x = x;
+            this.y = y;
+        }
     }
-}
-class Raft {
-    private game:Game;
-    constructor(g:Game){
-        this.game = g;
-        let chicken = new Chicken(this.game);
+    
+**Voorbeeld in eigen code**
+
+
+Hier gebruik ik het specifiek zodat ik de functie changeGameScene van de Game kan gebruiken binnen de Scene classes
+
+![Compo](./docs/img/composition.PNG)
+
+**Inheritence:**
+
+Inheritence gebruik ik zodat ik geen dubbele code hoef te schrijven. Ik maak een class waar de basis methods en properties in zitten. Als ik dan 
+een nieuwe class ga aanmaken kan ik deze alles van de eerste class laten overerven.
+
+voorbeeld:
+
+    class Animal{
+        // De standaard properties van een dier
+        protected name:string;
+        protected noise:string;
+        
+        // In de constructor wordt alles gevuld
+        constructor(name:string,noise:string)
+        {
+            this.name = name;
+            this.noise = noise;
+        }
+        
+        // Standaard method om geluid te maken (nu alleen een console.log)
+        public makeNoise()
+        {
+            console.log(this.noise);            
+        }
     }
-}
-class Chicken {
-    private game:Game;
-    constructor(g:Game){
-        this.game = g;
-        this.game.gameOver();
+
+    // class Dog erft alles van animal over
+    class Dog extends Animal{
+        constructor()
+        {
+            // Hier zetten we de naam en geluid van een hond
+            super('hond','Woef!');            
+        }
     }
-}
-```
+    
+    // Hond kan gebruik maken van de makeNoise method zonder hem zelf aan hoeven te maken
+    let hond = new Dog();
+    hond.makeNoise()
 
-#### Click Listener
-```
-this.div.addEventListener("click", (e:MouseEvent) => this.onClick(e));
-```
+**Voorbeeld in eigen code:** 
 
-#### Check of een object al bestaat
-```
-this.gun = new Gun();
+De GameObject Class wordt door heel veel andere classes overgeërfd. In de GameObject wordt de positie van de html element veranderd en is er een methode waarmee
+een element bewogen kan worden.
+![ParentClass](./docs/img/parentClass.PNG)
 
-if(this.gun){
-    console.log("De kip heeft al een gun!");
-}
-```
+De Player class maakt bijvoorbeeld gebruik van de Gameobject
+![ChildClass](./docs/img/childClass.PNG)
 
-#### De absolute positie van een DOM element
 
-Als je van een child element (zoals de gun of de kip) de x en y positie opvraagt, dan krijg je zijn relatieve positie ten opzichte van zijn parent. In deze voorbeeldcode vragen we de absolute positie in het HTML document op:
+#### **Klassendiagram**
+![Klassendiagram](./docs/img/klassdiagram-game.jpg)
 
-```
-// de globale positie van de gun opvragen
-let rect:ClientRect = this.div.getBoundingClientRect();
 
-// de positie van de gun aan de bullet geven 
-let bullet = new Bullet(rect.left, rect.top);
-```
-
-### Theme Song
-
-[Chicken on a raft](http://chickenonaraft.com)
+#### Peer review
+Link naar peer review:
+[Dion Pisas](https://github.com/AdriaanGiel/sketch_runner/blob/master/Peer_Review_Dion_Pisas.md)
