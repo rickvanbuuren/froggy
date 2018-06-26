@@ -214,7 +214,7 @@ De snelheid en het uiterlijk van de auto wordt hier veranderd.
 
 
 #### **Klassendiagram**
-![Klassendiagram](./docs/images/classdiagram.PNG)
+![Klassendiagram](./docs/images/classdiagram.png)
 
 
 #### Peer review
