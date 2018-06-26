@@ -69,76 +69,52 @@ van andere delen van je code. Een class heeft zijn eigen logica, soms aangevuld 
 
 **Encapsulation:**
 Encapsulation gebruik ik om mijn classes te beschermen en alles alleen beschikbaar te hebben in de juiste class.
+Hiermee weet ik zeker dat de classes werken zoals ik ze gemaakt heb. 
 Voor encapsulation kan je verschillende modifiers gebruiken om de juiste doel te bereiken. 
 
-* **Private** gebruik je als je wilt dat de properties en/of method alleen beschikbaar zijn binnen de functie.
+* **Private** dit gebruik je als je wilt dat de properties en/of method alleen beschikbaar zijn binnen de functie.
 
-        class object{
+        class Object{
             // properties en methods hebben allemaal de private modifier ervoor staan
             private prop1:string;
-            private prop2:string;
+            private prop2:number;
             
-            private function1()
+            private function()
             {
             
             }
         }
 
-* **Protected** gebruikt je bij inheritence. Hiermee maak je de properties en/of method van een parent class beschikbaar voor de class
+* **Protected** dit gebruik je bij inheritence. Hiermee maak je de properties en/of method van een parent class beschikbaar voor de class
 die overerft van de parent. 
 
         class Object{
             // properties en methods hebben allemaal de protected modifier ervoor staan
             protected prop1:string;
-            protected prop2:string;
+            protected prop2:number;
             
-            protected function1()
+            protected function()
             {
             
             }
         }
 
-* **Public** gebruik je als je wilt dat de properties en/of method beschikbaar is voor iedereen die een class heeft geïnstantieerd.
+* **Public** dit gebruik je als je wilt dat de properties en/of method beschikbaar is voor iedereen die een class heeft geïnstantieerd.
         
         class Object{
             // properties en methods hebben allemaal de public modifier ervoor staan
             public prop1:string;
-            public prop2:string;
+            public prop2:number;
             
-            public function1()
+            public function()
             {
             
             }
         }
 
-
-* **Static** gebruik je als je een propertie en/of method beschikbaar wilt maken voor de hele applicatie zonder dat een class is geïnstantieerd
-
-        class Object{
-            // properties en methods hebben de static modifier ervoor staan
-            static prop1:string;
-            
-            static function1()
-            {
-            
-            }
-        }
-        
-        class Object2{
-            
-            private doSomething()
-            {
-               // Kan worden gelezen zonder eerst een nieuwe object aan te maken. 
-               console.log(Object.prop1)
-            
-               // Kan aangeroepen worden zonder eerst een nieuwe Object aan te maken. 
-               Object.function1(); 
-            }
-            
-        }
 
 Om je applicatie zo veilig mogelijk te schrijven is de standaard eigenlijk dat alles private is. Als je een propertie wilt kunnen ophalen of 
-kunnen veranderen, maak je getters en setters. Voor functies gebruik je public alleen als de functie buiten de class moet kunnen worden aangeroepen.
+kunnen veranderen, maak je zogeheten getters en setters aan. Voor methods gebruik je public alleen als de methode buiten de class moet kunnen worden aangeroepen.
  
 **Voorbeeld in eigen code:** 
 
