@@ -60,6 +60,7 @@ class GameScreen extends Scene{
         }
 
         this.path = new Path(100, 445, 672, 57);
+
         for(let i = 0; i < 4; i++){
             this.roads.push(new Road(100, 445 + 57 + 57 + (57 * i), 672, 57));
         }
@@ -73,10 +74,6 @@ class GameScreen extends Scene{
             this.cars.push(new Whitecar(100, 445 + 60 + 57 + 57 + 57 + (57 * i)));
         }
 
-        for(let t of this.trees){
-            t.move();
-        }
-
         this.frog = new Frog(400, 790);
 
         this.border = new ScreenBorder(-177,0);
@@ -86,15 +83,13 @@ class GameScreen extends Scene{
     public update(){
         let hitswater = this.checkCollision(this.water.getRectangle(), this.frog.getRectangle())
 
-        
-        
         if(hitswater){
             let die = true
             for(let t of this.trees){
                 let hitstree = this.checkCollision(t.getRectangle(), this.frog.getRectangle())
             
                 if(hitstree){
-                    // this.frog.x += t.speed;
+                    this.frog.x += t.speed;
                     this.frog.div.style.transform = "translate("+this.frog.x+"px, "+this.frog.y+"px) rotate(270deg)";
                     die = false;
                     break;
@@ -107,8 +102,10 @@ class GameScreen extends Scene{
                 this.removeFromArray();
             }    
         }
-        
 
+        for(let t of this.trees){
+            t.move();
+        }
          
         for(let c of this.cars){
             c.move();
@@ -116,13 +113,11 @@ class GameScreen extends Scene{
             if(this.checkCollision(c.getRectangle(), this.frog.getRectangle())){
                 this.dead = new Dead(this.frog.x, this.frog.y);
                 this.frog.setBegin();
-                
                 this.removeFromArray();
             }    
         }
 
-        if(this.frog.y < 162){
-            console.log("won");
+        if(this.frog.y == 163){
             this.switchScreen("wonScreen")
         }
     }
@@ -149,6 +144,7 @@ class GameScreen extends Scene{
 
     private gameOver():void{
         if(this.lives.length == 0){
+            this.backgrounsMusic.stop();
             this.switchScreen("endScreen")
         }
     }

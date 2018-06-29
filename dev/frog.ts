@@ -45,7 +45,6 @@ class Frog {
 
     private move(e:KeyboardEvent):void {
         var code = e.keyCode ? e.keyCode : e.which;
-        console.log(this.y);
         if (code === 38) { //up key
             this.y -= this.yspeed;
             this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(270deg)"

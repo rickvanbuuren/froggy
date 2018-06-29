@@ -231,7 +231,6 @@ var Frog = (function () {
     });
     Frog.prototype.move = function (e) {
         var code = e.keyCode ? e.keyCode : e.which;
-        console.log(this.y);
         if (code === 38) {
             this.y -= this.yspeed;
             this._div.style.transform = "translate(" + this.x + "px, " + this.y + "px) rotate(270deg)";
@@ -315,10 +314,6 @@ var GameScreen = (function (_super) {
         for (var i = 0; i < 2; i++) {
             _this.cars.push(new Whitecar(100, 445 + 60 + 57 + 57 + 57 + (57 * i)));
         }
-        for (var _i = 0, _a = _this.trees; _i < _a.length; _i++) {
-            var t = _a[_i];
-            t.move();
-        }
         _this.frog = new Frog(400, 790);
         _this.border = new ScreenBorder(-177, 0);
         _this.border = new ScreenBorder(772, 0);
@@ -332,6 +327,7 @@ var GameScreen = (function (_super) {
                 var t = _a[_i];
                 var hitstree = this.checkCollision(t.getRectangle(), this.frog.getRectangle());
                 if (hitstree) {
+                    this.frog.x += t.speed;
                     this.frog.div.style.transform = "translate(" + this.frog.x + "px, " + this.frog.y + "px) rotate(270deg)";
                     die = false;
                     break;
@@ -343,8 +339,12 @@ var GameScreen = (function (_super) {
                 this.removeFromArray();
             }
         }
-        for (var _b = 0, _c = this.cars; _b < _c.length; _b++) {
-            var c = _c[_b];
+        for (var _b = 0, _c = this.trees; _b < _c.length; _b++) {
+            var t = _c[_b];
+            t.move();
+        }
+        for (var _d = 0, _e = this.cars; _d < _e.length; _d++) {
+            var c = _e[_d];
             c.move();
             if (this.checkCollision(c.getRectangle(), this.frog.getRectangle())) {
                 this.dead = new Dead(this.frog.x, this.frog.y);
@@ -352,8 +352,7 @@ var GameScreen = (function (_super) {
                 this.removeFromArray();
             }
         }
-        if (this.frog.y < 162) {
-            console.log("won");
+        if (this.frog.y == 163) {
             this.switchScreen("wonScreen");
         }
     };
@@ -379,6 +378,7 @@ var GameScreen = (function (_super) {
     };
     GameScreen.prototype.gameOver = function () {
         if (this.lives.length == 0) {
+            this.backgrounsMusic.stop();
             this.switchScreen("endScreen");
         }
     };
