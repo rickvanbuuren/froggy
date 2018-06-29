@@ -122,3 +122,8 @@ frog {
 	background-image: url('../images/frog.png');
 }
 
+tree {
+	width:277px; min-height:54px;
+	background-image: url('../images/tree.png');
+}
+

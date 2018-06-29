@@ -11,6 +11,13 @@ class Frog {
     private yspeed:number;
     private _lifes:number;
 
+    private sound:any = new Howl({
+        src: "./sounds/sound-frogger-hop.wav",
+        loop: false,
+        volume: 1.0
+    });
+
+
     public get div(): HTMLElement {
 		return this._div;
     }
@@ -33,29 +40,33 @@ class Frog {
 
         this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(270deg)" 
 
-        document.body.addEventListener('keydown', ()=> this.move(event:KeyboardEvent))
+        document.body.addEventListener('keyup', ()=> this.move(event:KeyboardEvent))
     }
 
     private move(e:KeyboardEvent):void {
         var code = e.keyCode ? e.keyCode : e.which;
-            if (code === 38) { //up key
-                this.y -= this.yspeed;
-                this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(270deg)"
-            } else if (code === 40) { //down key
-                console.log(this.y)
-                if(this.y > 733){
-                    this.y += 0;
-                }else{
-                    this.y += this.yspeed;
-                }
-                this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(90deg)"
-            } else if(code === 37){  //left key
-                this.x = Math.max(109, this.x-this.xspeed);
-                this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(180deg)"
-            } else if(code === 39){  //right key
-                this.x = Math.min(735, this.x+this.xspeed);
-                this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(0deg)"
+        console.log(this.y);
+        if (code === 38) { //up key
+            this.y -= this.yspeed;
+            this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(270deg)"
+            this.sound.play()
+        } else if (code === 40) { //down key
+            if (this.y > 733){
+                this.y += 0;
+            }else{
+                this.y += this.yspeed;
             }
+            this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(90deg)"
+            this.sound.play()
+        } else if(code === 37){  //left key
+            this.x = Math.max(109, this.x-this.xspeed);
+            this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(180deg)"
+            this.sound.play()
+        } else if(code === 39){  //right key
+            this.x = Math.min(735, this.x+this.xspeed);
+            this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) rotate(0deg)"
+            this.sound.play()
+        }
     }
 
     public getRectangle() {

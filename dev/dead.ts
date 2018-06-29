@@ -8,6 +8,13 @@ class Dead {
     private width:number;
     private height:number;
 
+    private sound:any = new Howl({
+        src: "./sounds/sound-frogger-squash.wav",
+        loop: false,
+        volume: 1.0
+    });
+
+
     public get div(): HTMLElement {
 		return this._div;
 	}
@@ -22,6 +29,8 @@ class Dead {
         this.y = y;
 
         this._div.style.transform = "translate("+this.x+"px, "+this.y+"px) "
+
+        this.sound.play();
     }
 
 }

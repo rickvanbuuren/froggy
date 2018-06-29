@@ -1,6 +1,7 @@
 class GameScreen extends Scene{
     
     private trees:Array<Tree>;
+    private secondTreeLine:Array<Tree>;
     private roads:Array<Road>;
     private cars:Array<Car>;
     private lives:Array<UIelement>;
@@ -13,6 +14,13 @@ class GameScreen extends Scene{
     private border:ScreenBorder
     private fps:number;
     private gameover:Boolean;
+
+    private backgrounsMusic:any = new Howl({
+        src: "./sounds/FroggerFix.mp3",
+        loop: true,
+        volume: 0.8
+    });
+
 
     constructor(game:Game){
         super(game)
@@ -28,12 +36,27 @@ class GameScreen extends Scene{
 
         this.fps = 60;
 
+        this.backgrounsMusic.play();
+
         for(let i = 0; i < 3; i++){
             this.lives.push(new LiveUI(100 + (i * 45), 850))
         }
 
-        for(let i = 0; i < 5; i++){
-            this.trees.push(new Tree(0,165 + (57 * i)));
+        let count = 0;
+        let previousSpeed = 0;
+        for(let i = 0; i < 10; i++){
+            let x = -377;
+            let y = 165 + (57 * count)
+            let speed = Math.random() * 4 + 1;
+
+            if(i%2==0){
+                x = 0;
+                previousSpeed = speed
+            }
+            if(i%2==1){
+                count++
+            }
+            this.trees.push(new Tree(x,y, previousSpeed));
         }
 
         this.path = new Path(100, 445, 672, 57);
@@ -50,6 +73,10 @@ class GameScreen extends Scene{
             this.cars.push(new Whitecar(100, 445 + 60 + 57 + 57 + 57 + (57 * i)));
         }
 
+        for(let t of this.trees){
+            t.move();
+        }
+
         this.frog = new Frog(400, 790);
 
         this.border = new ScreenBorder(-177,0);
@@ -58,6 +85,8 @@ class GameScreen extends Scene{
 
     public update(){
         let hitswater = this.checkCollision(this.water.getRectangle(), this.frog.getRectangle())
+
+        
         
         if(hitswater){
             let die = true
@@ -65,7 +94,7 @@ class GameScreen extends Scene{
                 let hitstree = this.checkCollision(t.getRectangle(), this.frog.getRectangle())
             
                 if(hitstree){
-                    this.frog.x += t.speed;
+                    // this.frog.x += t.speed;
                     this.frog.div.style.transform = "translate("+this.frog.x+"px, "+this.frog.y+"px) rotate(270deg)";
                     die = false;
                     break;
@@ -78,10 +107,8 @@ class GameScreen extends Scene{
                 this.removeFromArray();
             }    
         }
+        
 
-        for(let t of this.trees){
-            t.move();
-        }
          
         for(let c of this.cars){
             c.move();
@@ -94,7 +121,8 @@ class GameScreen extends Scene{
             }    
         }
 
-        if(this.frog.y < 160){
+        if(this.frog.y < 162){
+            console.log("won");
             this.switchScreen("wonScreen")
         }
     }

@@ -14,11 +14,11 @@ class Tree {
 		return this._div;
 	}
 
-    constructor(x:number, y:number) {
+    constructor(x:number, y:number, speed:number) {
         this._div = document.createElement("tree");
         document.body.appendChild(this._div);
         
-        this.speed = Math.random() * 4 + 1;
+        this.speed = speed
         this.width = 277;
         this.height = 50;
         this.x = x;

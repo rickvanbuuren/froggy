@@ -10,10 +10,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var Tree = (function () {
-    function Tree(x, y) {
+    function Tree(x, y, speed) {
         this._div = document.createElement("tree");
         document.body.appendChild(this._div);
-        this.speed = Math.random() * 4 + 1;
+        this.speed = speed;
         this.width = 277;
         this.height = 50;
         this.x = x;
@@ -172,6 +172,11 @@ var UIelement = (function () {
 }());
 var Dead = (function () {
     function Dead(x, y) {
+        this.sound = new Howl({
+            src: "./sounds/sound-frogger-squash.wav",
+            loop: false,
+            volume: 1.0
+        });
         this._div = document.createElement("dead");
         document.body.appendChild(this._div);
         this.width = 50;
@@ -179,6 +184,7 @@ var Dead = (function () {
         this.x = x;
         this.y = y;
         this._div.style.transform = "translate(" + this.x + "px, " + this.y + "px) ";
+        this.sound.play();
     }
     Object.defineProperty(Dead.prototype, "div", {
         get: function () {
@@ -192,6 +198,11 @@ var Dead = (function () {
 var Frog = (function () {
     function Frog(x, y) {
         var _this = this;
+        this.sound = new Howl({
+            src: "./sounds/sound-frogger-hop.wav",
+            loop: false,
+            volume: 1.0
+        });
         this._div = document.createElement("frog");
         document.body.appendChild(this._div);
         this._lifes = 3;
@@ -202,7 +213,7 @@ var Frog = (function () {
         this.xspeed = 30;
         this.yspeed = 57;
         this._div.style.transform = "translate(" + this.x + "px, " + this.y + "px) rotate(270deg)";
-        document.body.addEventListener('keydown', function () { return _this.move(event, KeyboardEvent); });
+        document.body.addEventListener('keyup', function () { return _this.move(event, KeyboardEvent); });
     }
     Object.defineProperty(Frog.prototype, "div", {
         get: function () {
@@ -220,12 +231,13 @@ var Frog = (function () {
     });
     Frog.prototype.move = function (e) {
         var code = e.keyCode ? e.keyCode : e.which;
+        console.log(this.y);
         if (code === 38) {
             this.y -= this.yspeed;
             this._div.style.transform = "translate(" + this.x + "px, " + this.y + "px) rotate(270deg)";
+            this.sound.play();
         }
         else if (code === 40) {
-            console.log(this.y);
             if (this.y > 733) {
                 this.y += 0;
             }
@@ -233,14 +245,17 @@ var Frog = (function () {
                 this.y += this.yspeed;
             }
             this._div.style.transform = "translate(" + this.x + "px, " + this.y + "px) rotate(90deg)";
+            this.sound.play();
         }
         else if (code === 37) {
             this.x = Math.max(109, this.x - this.xspeed);
             this._div.style.transform = "translate(" + this.x + "px, " + this.y + "px) rotate(180deg)";
+            this.sound.play();
         }
         else if (code === 39) {
             this.x = Math.min(735, this.x + this.xspeed);
             this._div.style.transform = "translate(" + this.x + "px, " + this.y + "px) rotate(0deg)";
+            this.sound.play();
         }
     };
     Frog.prototype.getRectangle = function () {
@@ -257,6 +272,11 @@ var GameScreen = (function (_super) {
     __extends(GameScreen, _super);
     function GameScreen(game) {
         var _this = _super.call(this, game) || this;
+        _this.backgrounsMusic = new Howl({
+            src: "./sounds/FroggerFix.mp3",
+            loop: true,
+            volume: 0.8
+        });
         _this.gameover = false;
         _this.trees = new Array();
         _this.roads = new Array();
@@ -265,11 +285,24 @@ var GameScreen = (function (_super) {
         _this.water = new Water(100, 105, 672, 342);
         _this.top = new Top(100, 105, 672, 57);
         _this.fps = 60;
+        _this.backgrounsMusic.play();
         for (var i = 0; i < 3; i++) {
             _this.lives.push(new LiveUI(100 + (i * 45), 850));
         }
-        for (var i = 0; i < 5; i++) {
-            _this.trees.push(new Tree(0, 165 + (57 * i)));
+        var count = 0;
+        var previousSpeed = 0;
+        for (var i = 0; i < 10; i++) {
+            var x = -377;
+            var y = 165 + (57 * count);
+            var speed = Math.random() * 4 + 1;
+            if (i % 2 == 0) {
+                x = 0;
+                previousSpeed = speed;
+            }
+            if (i % 2 == 1) {
+                count++;
+            }
+            _this.trees.push(new Tree(x, y, previousSpeed));
         }
         _this.path = new Path(100, 445, 672, 57);
         for (var i = 0; i < 4; i++) {
@@ -281,6 +314,10 @@ var GameScreen = (function (_super) {
         }
         for (var i = 0; i < 2; i++) {
             _this.cars.push(new Whitecar(100, 445 + 60 + 57 + 57 + 57 + (57 * i)));
+        }
+        for (var _i = 0, _a = _this.trees; _i < _a.length; _i++) {
+            var t = _a[_i];
+            t.move();
         }
         _this.frog = new Frog(400, 790);
         _this.border = new ScreenBorder(-177, 0);
@@ -295,7 +332,6 @@ var GameScreen = (function (_super) {
                 var t = _a[_i];
                 var hitstree = this.checkCollision(t.getRectangle(), this.frog.getRectangle());
                 if (hitstree) {
-                    this.frog.x += t.speed;
                     this.frog.div.style.transform = "translate(" + this.frog.x + "px, " + this.frog.y + "px) rotate(270deg)";
                     die = false;
                     break;
@@ -307,12 +343,8 @@ var GameScreen = (function (_super) {
                 this.removeFromArray();
             }
         }
-        for (var _b = 0, _c = this.trees; _b < _c.length; _b++) {
-            var t = _c[_b];
-            t.move();
-        }
-        for (var _d = 0, _e = this.cars; _d < _e.length; _d++) {
-            var c = _e[_d];
+        for (var _b = 0, _c = this.cars; _b < _c.length; _b++) {
+            var c = _c[_b];
             c.move();
             if (this.checkCollision(c.getRectangle(), this.frog.getRectangle())) {
                 this.dead = new Dead(this.frog.x, this.frog.y);
@@ -320,7 +352,8 @@ var GameScreen = (function (_super) {
                 this.removeFromArray();
             }
         }
-        if (this.frog.y < 160) {
+        if (this.frog.y < 162) {
+            console.log("won");
             this.switchScreen("wonScreen");
         }
     };
